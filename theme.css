@@ -32,8 +32,10 @@ a:focus {
     height: 100%;
     background: center 0 no-repeat;
     /*background-image: url("img/bg.png");*/
-    background-image: url("img/numix-agave-bg-nologo.svg");
-    background-size: 100% auto;
+    background: url("img/distro.png") 50% 50% no-repeat, 
+                      url("img/bg_16x9.png") no-repeat;
+    background-size: auto 30%,
+                     100% auto;
 
 }
 
