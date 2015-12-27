@@ -3,50 +3,60 @@ var num_users = 0;
 
 // Called by MDM to disable user input
 function mdm_disable() {
-            $('#entry').prop("disabled", true);
-            $('#ok_button').prop("disabled", true);
-            $('#login-box').css('cursor', 'progress');
-            $('#entry').css('cursor', 'progress');
-            $('#ok_button').css('cursor', 'progress');
+    $('#entry').prop("disabled", true);
+    $('#ok_button').prop("disabled", true);
+    $('#login-box').css('cursor', 'progress');
+    $('#entry').css('cursor', 'progress');
+    $('#ok_button').css('cursor', 'progress');
 }
 
 // Called by MDM to enable user input
 function mdm_enable() {
-            $('#entry').prop("disabled", false);
-            $('#ok_button').prop("disabled", false);
-            $('#login-box').css('cursor', 'default');
-            $('#entry').css('cursor', 'text');
-            $('#ok_button').css('cursor', 'default');
+    $('#entry').prop("disabled", false);
+    $('#ok_button').prop("disabled", false);
+    $('#login-box').css('cursor', 'default');
+    $('#entry').css('cursor', 'text');
+    $('#ok_button').css('cursor', 'default');
 }
 
-// Called by MDM to allow the user to input a username
-function mdm_prompt(message) {
+// Called by MDM to set the welcome message
+function set_welcome_message(message) {         
+    //document.getElementById("welcome_message").innerHTML = message;
+}
+
+// Called by MDM to update the clock
+function set_clock(message) {           
+    document.getElementById("clock").innerHTML = message;
+}
+
+// Called by MDM to allow the user to input a username      
+function mdm_prompt(message) {  
     mdm_enable();
-            $('#login_box').hide();
+    document.getElementById("current_username").innerHTML = login_label;
+    document.getElementById("selected_status").innerHTML = enter_your_username_label;
+    document.getElementById("selected_avatar").src = "img/default_user.svg";
+
     for (var i=0;i<num_users;i++) {
         $('#user' + i).appendTo('#top_users');
         $('#user' + i).show();
     }
-    //document.getElementById("welcome_message").innerHTML = message;
     document.getElementById("entry").value = "";
     document.getElementById("entry").type = "text";
     document.getElementById("entry").focus();
-    selected_user = -1;
+    selected_user = -1;         
 }
 
 // Called by MDM to allow the user to input a password
-function mdm_noecho(message) {
+function mdm_noecho(message) {  
     mdm_enable();
-            $('#login_box').fadeIn();
-    //document.getElementById("welcome_message").innerHTML = message;
     document.getElementById("entry").value = "";
     document.getElementById("entry").type = "password";
     document.getElementById("entry").focus();
 }
 
 // Called by MDM to show a message (usually "Please enter your username")
-function mdm_msg(message) {
-    //document.getElementById("message").innerHTML = message;
+function mdm_msg(message) {         
+    //document.getElementById("message").innerHTML = message;           
 }
 
 // Called by MDM to show a timed login countdown
@@ -56,12 +66,12 @@ function mdm_timed(message) {
     }
     else {
         document.getElementById("timed").style.display = 'none';
-    }
-    document.getElementById("timed").innerHTML = message;
+    }           
+    document.getElementById("timed").innerHTML = message;           
 }
 
-// Called by MDM to show an error
-function mdm_error(message) {
+// Called by MDM to show an error       
+function mdm_error(message) {                       
     if (message != "") {
         document.getElementById("error").style.display = 'block';
     }
@@ -69,44 +79,30 @@ function mdm_error(message) {
         document.getElementById("error").style.display = 'none';
     }
     document.getElementById("error").innerHTML = message;
-}
-
-// Send user input to MDM
-function send_login() {
-    // read the value before we disable the field, as it will be changed to "disabled"
-    var value = document.getElementById("entry").value;
-    mdm_disable();
-    alert("LOGIN###" + value);
-    return false;
-}
-
-function init() {
-    document.getElementById("error").style.display = 'none';
-    document.getElementById("timed").style.display = 'none';
-    document.getElementById("current_session_picture").width = 16;
-}
+}   
 
 // Called by MDM to add a user to the list of users
-function mdm_add_user(username, gecos, status) {
+function mdm_add_user(username, gecos, status, avatar) {
 
     var top_users = document.getElementById("top_users");
-
+            
     var link = document.createElement('a');
         link.setAttribute('href', "javascript:alert('USER###"+username+"')");
         link.username = username;
         link.gecos = gecos;
         link.current_status = status;
+        link.avatar = avatar;
         link.setAttribute('id', "user" + num_users);
 
-    var div = document.createElement('div');
+    var div = document.createElement('div');                
         div.setAttribute('class', "user_box");
 
 
-    var font_username = document.createElement('span');
+    var font_username = document.createElement('font');
         font_username.setAttribute('class', "font_username");
         font_username.innerHTML = username;
 
-    var font_gecos = document.createElement('span');
+    var font_gecos = document.createElement('font');
         font_gecos.setAttribute('class', "font_gecos");
         font_gecos.innerHTML = " " + gecos;
 
@@ -115,83 +111,96 @@ function mdm_add_user(username, gecos, status) {
     link.appendChild(div);
     top_users.appendChild(link);
 
-    num_users = num_users + 1;
-}
+    num_users = num_users + 1;             
+}   
 
 // Called by MDM to add a session to the list of sessions
 function mdm_add_session(session_name, session_file) {
-
+    
     session_name = session_name.replace("Ubuntu", "Unity");
-
-    var filename = session_name.toLowerCase();
+    
+    var filename = session_file.toLowerCase();
     filename = filename.replace(/ /g, "-");
     filename = filename.replace(/\(/g, "");
     filename = filename.replace(/\)/g, "");
+    filename = filename.replace(/\)/g, "");
+    filename = filename.replace(/.desktop/g, "");
+                                            
+    var link1 = document.createElement('a');    
+        link1.setAttribute('href', "javascript:alert('SESSION###"+session_name+"###"+session_file+"');mdm_set_current_session('"+session_name+"','"+session_file+"');");
 
-    var link1 = document.createElement('a');
-        link1.setAttribute('href', "javascript:alert('SESSION###"+session_name+"###"+session_file+"');select_session('"+session_name+"','"+session_file+"');");
-
-    var link2 = document.createElement('a');
-        link2.setAttribute('href', "javascript:alert('SESSION###"+session_name+"###"+session_file+"');select_session('"+session_name+"','"+session_file+"');");
-
+    var link2 = document.createElement('a');    
+        link2.setAttribute('href', "javascript:alert('SESSION###"+session_name+"###"+session_file+"');mdm_set_current_session('"+session_name+"','"+session_file+"');");
+        
     var picture = document.createElement('img');
         picture.setAttribute('class', "session-picture");
         picture.setAttribute('src', "../common/img/sessions/"+filename+".svg");
         picture.setAttribute('onerror', "this.src='../common/img/sessions/default.svg';");
-
-    var name_div = document.createTextNode(session_name);
-
+                    
+    var name_div = document.createTextNode(session_name);               
+                                                                                                                                    
     link1.appendChild(picture);
     link2.appendChild(name_div);
-
+        
     var table = document.getElementById("sessions");
 
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
 
-    var cell1 = row.insertCell(0);
-    cell1.width = "28px";
+    var cell1 = row.insertCell(0); 
+    cell1.width = "28px";          
     cell1.appendChild(link1);
-
-    var cell2 = row.insertCell(1);
+  
+    var cell2 = row.insertCell(1);           
     cell2.appendChild(link2);
-}
+}       		
 
-function select_session(session_name, session_file) {
-    var filename = session_name.toLowerCase();
-    filename = filename.replace(/ /g, "-");
-    filename = filename.replace(/\(/g, "");
-    filename = filename.replace(/\)/g, "");
-    document.getElementById("current_session_picture").src = "../common/img/sessions/"+filename+".svg";
-    document.getElementById("current_session_picture").title = session_name;
-    document.getElementById("current_session_picture").width = 16;
-            $('#current_session_picture').popover('hide');
+// Called by MDM to get the full path of a language flag file
+function mdm_get_language_flag_filepath(language_code) {
+	
+	var filename = language_code.toLowerCase();
+	filename = filename.replace(".utf-8", "");
+	var bits = filename.split("_");
+
+	// Check for minority languages that have a flag.
+	// For example: Catalan's language code can be ca or ca_es or ca_fr, Welsh's cy or cy_gb...
+	if (filename === "ca" || bits[0] === "ca") {
+		filename = "_Catalonia";
+	} else if (filename === "cy" || bits[0] === "cy") {
+		filename = "_Wales";
+	} else if (filename === "eu" || bits[0] === "eu") {
+		filename = "_Basque Country";
+	} else if (filename === "gd" || bits[0] === "gd") {
+		filename = "_Scotland";
+	} else if (filename === "gl" || bits[0] === "gl") {
+		filename = "_Galicia";
+	} else if (filename === "sco" || bits[0] === "sco") {
+		filename = "_Scotland";
+	// Use the country code part of the language code (if it's available). For example: en_AU -> au.
+	} else if (bits.length === 2) {
+		filename = bits[1];
+	}
+
+	return "../common/img/languages/"+filename+".png";
 }
 
 // Called by MDM to add a language to the list of languages
 function mdm_add_language(language_name, language_code) {
+	
+    var link1 = document.createElement('a');    
+        link1.setAttribute('href', "javascript:alert('LANGUAGE###"+language_code+"');mdm_set_current_language('"+language_name+"','"+language_code+"');");
 
-    var filename = language_code.toLowerCase();
-    filename = filename.replace(".utf-8", "");
-    bits = filename.split("_");
-    if (bits.length == 2) {
-        filename = bits[1];
-    }
-
-    var link1 = document.createElement('a');
-        link1.setAttribute('href', "javascript:alert('LANGUAGE###"+language_code+"')");
-
-    var link2 = document.createElement('a');
-        link2.setAttribute('href', "javascript:alert('LANGUAGE###"+language_code+"')");
+    var link2 = document.createElement('a');    
+        link2.setAttribute('href', "javascript:alert('LANGUAGE###"+language_code+"');mdm_set_current_language('"+language_name+"','"+language_code+"');");
 
     var picture = document.createElement('img');
         picture.setAttribute('class', "language-picture");
-        picture.setAttribute('src', "../common/img/languages/"+filename+".png");
+        picture.setAttribute('src', mdm_get_language_flag_filepath(language_code));
         picture.setAttribute('onerror', "this.src='../common/img/languages/generic.png';");
-        picture.setAttribute('title', language_name);
-
-    var name_div = document.createTextNode(language_name);
-
+        picture.setAttribute('title', language_name);               
+                                    
+    var name_div = document.createTextNode(language_name);              
+                                                                                                                                    
     link1.appendChild(picture);
     link2.appendChild(name_div);
 
@@ -199,38 +208,52 @@ function mdm_add_language(language_name, language_code) {
 
     var rowCount = table.rows.length;
     var row = table.insertRow(rowCount);
-
+    
     var cell1 = row.insertCell(0);
     cell1.width = "25px";
     cell1.appendChild(link1);
-
+    
     var cell2 = row.insertCell(1);
     cell2.appendChild(link2);
 }
 
-function mdm_set_current_language(language_name, language_code)    {
-    var filename = language_code.toLowerCase();
-    filename = filename.replace(".utf-8", "");
-    bits = filename.split("_");
-    if (bits.length == 2) {
-        filename = bits[1];
-    }
-    document.getElementById("current_language_flag").src = "img/language.svg";
+function mdm_set_current_language(language_name, language_code) {
+    document.getElementById("current_language_flag").src = mdm_get_language_flag_filepath(language_code);
     document.getElementById("current_language_flag").title = language_name;
     document.getElementById("current_language_flag").width = 16;
+    $('#current_language_flag').popover('hide');
 }
 
-function mdm_set_current_user(username)    {
-    //document.getElementById("lsb").innerHTML = username;
+function mdm_set_current_session(session_name, session_file)    {
+    var filename = session_file.toLowerCase();
+    filename = filename.replace(/ /g, "-");
+    filename = filename.replace(/\(/g, "");
+    filename = filename.replace(/\)/g, "");
+    filename = filename.replace(/.desktop/g, "");
+    document.getElementById("current_session_picture").src = "../common/img/sessions/"+filename+".svg";
+    document.getElementById("current_session_picture").title = session_name;
+    document.getElementById("current_session_picture").width = 16;
+    $('#current_session_picture').popover('hide');
+}
+
+function mdm_set_current_user(username) {
+    document.getElementById("current_username").innerHTML = "";
+    document.getElementById("selected_status").innerHTML = "";
+    var user_found = false;
     for (var i=0;i<num_users;i++) {
         var user = document.getElementById("user" + i);
         if (user.username == username) {
             select_user_at_index(i, false);
+            user_found = true;
         }
+    }
+    if (! user_found) {
+        document.getElementById("current_username").innerHTML = username;
+        document.getElementById("selected_status").innerHTML = enter_your_password_label;
     }
 }
 
-function select_user_at_index(index, alert_mdm) {
+function select_user_at_index(index, alert_mdm) {                   
 
     var index_to_select = index;
     if (index_to_select < 0) {
@@ -239,45 +262,42 @@ function select_user_at_index(index, alert_mdm) {
     if (index_to_select >= num_users) {
         index_to_select = 0;
     }
-
+    
     var username = null;
 
     for (var i=0;i<num_users;i++) {
         if (i < index_to_select) {
-
             $('#user' + i).appendTo('#top_users');
-    //$('#user' + i).show();
         }
         else if  (i == index_to_select) {
             var user = document.getElementById("user" + i);
-            var current_gecos = document.getElementById("current_gecos");
-            var current_username = document.getElementById("current_username");
-            var selected_status = document.getElementById("selected_status");
+            var selected_status = document.getElementById("selected_status");                   
             username = user.username;
-            current_username.innerHTML = user.username;
-            current_gecos.innerHTML = user.gecos;
-            selected_status.innerHTML = user.current_status;
-            var picture = document.getElementById('selected_avatar');
-            picture.setAttribute('src', "file:///home/"+username+"/.face");
-    //$('#user' + i).hide();
+            if (user.current_status != "") {
+                selected_status.innerHTML = user.current_status;
+            }
+            else {
+                selected_status.innerHTML = enter_your_password_label;
+            }
+            var picture = document.getElementById('selected_avatar');               
+            picture.setAttribute('src', "file://"+user.avatar);
             $('#user' + i).appendTo('#selected_user');
         }
         else {
-          $('#user' + i).appendTo('#bottom_users');
-    //$('#user' + i).show();
-        }
+            $('#user' + i).appendTo('#bottom_users');
+        }   
         selected_user = index_to_select;
-    }
+    }           
 
     if (alert_mdm) {
         alert('USER###'+ username);
     }
-}
+}       
 
 // Called by MDM if the SHUTDOWN command shouldn't appear in the greeter
 function mdm_hide_shutdown() {
     document.getElementById("shutdown").style.display = 'none';
-}
+}   
 
 // Called by MDM if the SUSPEND command shouldn't appear in the greeter
 function mdm_hide_suspend() {
@@ -297,39 +317,4 @@ function mdm_hide_quit() {
 // Called by MDM if the XDMCP command shouldn't appear in the greeter
 function mdm_hide_xdmcp() {
     document.getElementById("xdmcp").style.display = 'none';
-}
-
-function quit_dialog() {
-    // bootbox.dialog("<span>Are you sure you want to quit?</span>",
-    bootbox.dialog("<span>$areyousuretoquit</span>",
-        [
-            {
-            // "label" : "<button type='button' class='shutdown-button'>$shutdown</button>",
-                "label" : "<button type='button' class='shutdown-button' title='$shutdown'><span class='glyphicon glyphicon-off'></span></button>",
-                "callback": function() {
-                    alert('FORCE-SHUTDOWN###');
-                }
-            },
-
-            {
-            // "label" : "<button type='button' class='suspend-button'>$suspend</button>",
-                "label" : "<button type='button' class='suspend-button' title='$suspend'><span class='glyphicon glyphicon-off'></span></button>",
-                "callback": function() {
-                    alert('FORCE-SUSPEND###');
-                }
-            },
-
-            {
-            // "label" : "<button type='button' class='restart-button'>$restart</button>",
-                "label" : "<button type='button' class='restart-button' title='$restart'><span class='glyphicon glyphicon-repeat'></span></button>",
-                "callback": function() {
-                    alert('FORCE-RESTART###');
-                }
-            },
-            {
-        // "label" : "<button type='button' class='cancel-button'>$cancel_label</button>"
-                    "label" : "<button type='button' class='cancel-button' title='$cancel_label'><span class='glyphicon glyphicon-remove'></span></button>",
-            }
-        ]
-    );
-}
+}               
