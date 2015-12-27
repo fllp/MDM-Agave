@@ -1,0 +1,41 @@
+@font-face {
+	font-family: "Droid Sans";
+	src: url("fonts/DroidSans.ttf");
+}
+
+@font-face {
+	font-family: "raleway";
+	src: url("fonts/raleway_thin.otf");
+}
+
+@font-face {
+	font-family: "Sawasdee";
+	src: url("fonts/Sawasdee.ttf");
+}
+
+@font-face {
+	font-family: "Fonce Sans";
+	src: url("fonts/FonceSans.otf");
+}
+
+@font-face {
+	font-family: "Fira Sans";
+	src: url("fonts/FiraSans-UltraLight.ttf");
+}
+
+@font-face {
+	font-family: "Fira Sans";
+	src: url("FiraSans-UltraLight.otf");
+}
+
+/*
+@font-face {
+	font-family: "Fira Sans UltraLight";
+	src: url("fonts/FiraSans-UltraLight.eot");
+}
+
+@font-face {
+	font-family: "Fira Sans UltraLight";
+	src: url("fonts/FiraSans-UltraLight.woff");
+}
+*/

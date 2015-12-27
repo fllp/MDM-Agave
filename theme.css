@@ -1,0 +1,877 @@
+html {
+    background-color: #000000;
+}
+
+body {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    background-color: #F53434;
+    overflow: hidden;
+    font-family: Droid Sans;
+    font-size: 13px;
+    text-align: center;
+}
+
+a {
+    color:#0078ff;
+}
+
+a:focus {
+    outline: 0px solid black!important;
+}
+
+/* ===================================================================
+ * Background image
+ * ===================================================================*/
+
+#canvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: center 0 no-repeat;
+    /*background-image: url("img/bg.png");*/
+    background-image: url("img/numix-agave-bg-nologo.svg");
+    background-size: 100% auto;
+
+}
+
+/* ===================================================================
+ * Date and Time
+ * ===================================================================*/
+
+#clock_dash{
+    display: block;
+    /* background: #2D2D2D;*/
+    background: #252f37;
+    height: 14em;
+    /*
+    border-bottom-left-radius: 180em 16em;
+    border-bottom-right-radius: 180em 16em;
+    */
+    border-bottom: 1px solid #777;
+    box-shadow: 0 5px 20px #222;
+    margin-bottom: 30px;
+
+}
+#date_time {
+    display: block;
+
+    /* Make sure this is centered */
+    width: 48%;
+    margin: 0 26%;
+    position: relative;
+    padding: 25px 0  0;
+}
+#clock_border{
+    position: relative;
+    top: 20px;
+    /* Make sure this is centered */
+    width: 98%;
+    margin: 0 1%;
+
+    border-bottom: 1px solid #999;
+}
+
+.clock {
+    display: inline-block;
+    position: relative;
+    top: 26px;
+    font-family: "Sawasdee", "Fonce Sans";
+    color:#fff;
+    line-height: 40pt;
+    font-size:32pt;
+    text-shadow:0 -1px 3px rgba(0, 0, 0, .3), 0 1px 2px rgba(255, 255, 255, .5);
+    font-weight:100;
+}
+
+#mins.clock {
+    font-size:20pt;
+    position:relative;
+    top: 8px;
+    font-weight: 600;
+}
+
+.dots {
+    display: none;
+    min-width: 3px;
+    max-width: 3px;
+    margin-left: -10px;
+    text-align: left;
+}
+
+
+.date {
+    position: relative;
+    top: 30px;
+    font-family: "Sawasdee", "Fonce Sans", sans-serif;
+    color:#fff;
+    font-size: 10pt;
+    font-stretch: ultra-expanded;
+    font-weight: normal;
+    text-shadow:0 -1px 3px rgba(0, 0, 0, .3), 0 1px 4px rgba(255, 255, 255, .5);
+}
+
+/* ===================================================================
+ * Various boxes dividing the entire screen
+ * ===================================================================*/
+
+#panel {
+    position: fixed;
+    left: 70%;
+    top: 50%;
+    height: 200px;
+    margin-top: -55px;
+    width: 600px;
+    margin-left: -300px;
+}
+
+#left_box {
+    /*display:table;*/
+    position: fixed;
+    width: 50%;
+    height: 100%;
+}
+
+/* ===================================================================
+ * LOGIN BOX
+ * ===================================================================*/
+
+#login_box {
+    position: relative;
+    top: 40px;
+    max-width: 500px;
+    height: 100px;
+    margin-left: 80px;
+    margin-left: 15%;
+    /*
+    background-color: #2d2d2d;
+    background-color: #252f37;
+    */
+    color: #dcdcdc;
+}
+
+#top_box {
+    position: relative;
+    /*height: 45%;*/
+}
+
+#top_inner_box {
+    position: relative;
+    display: table-cell;
+    vertical-align: bottom;
+    /*height: 100%;*/
+    width: 100%;
+}
+
+#top_users {
+    position: relative;
+    width: 100%;
+    bottom: 0px;
+    left: 0px;
+}
+
+#middle_box {
+    height: 150px;
+    width: 100%;
+    /*margin-top: -30px;*/
+}
+
+#selected_user_box {
+}
+
+#selected_user .user_box {
+    display: none;
+    position: absolute;
+    margin-left: 120px;
+    margin-top: 30px;
+    text-align: left;
+    font-weight: 200;
+}
+
+#right-box {
+    position: fixed;
+    right: 0px;
+    vertical-align: middle;
+    height: 100%;
+    width: 50%;
+}
+
+.selection-picture {
+}
+
+.user_box {
+    position: relative;
+    margin-left: 200px;
+    text-align: left;
+    font-family: "Raleway Light";
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/* ===================================================================
+ * The language and session icons inside the login box
+   The images are linked in the html file!!
+ * ===================================================================*/
+
+#keyboard_pic, #current_language_flag, #current_session_picture {
+    border: 2px solid #252F37;
+    border-radius: 12px;
+    background: #252F37;
+    top: 12px;
+    height: 22px;
+    width: 22px;
+}
+
+
+#keyboard_pic {
+    position: absolute;
+    right: 54px;
+}
+
+
+#current_language_flag {
+    position: absolute;
+    right: 27px;
+    color: #999;
+}
+
+#current_language_flag:hover {
+    color: #fff;
+}
+
+#current_session_picture {
+    position: absolute;
+    right: 0px;
+}
+
+
+/* ===================================================================
+ * The avatar in the login box
+ * ===================================================================*/
+
+#selected_avatar {
+    position: relative;
+    float: left;
+    left: 13px;
+    top: -36px;
+    width: 110px;
+    height: 110px;
+    border: 3px solid #333333;
+    border-radius: 60px;
+    background: linear-gradient(#7ec1ee,#6cb7ec);
+    padding: 6px;
+    z-index: 5;
+}
+
+/* ===================================================================
+ * Entry of the login box
+ * ===================================================================*/
+
+#entry_box {
+    background: #252F37;
+    position: relative;
+    top: 38px;
+    margin: 0px 0 0 60px;
+    padding-left: 13px;
+    height: 54px;
+    min-width: 300px;
+    max-width: 500px;
+    border: 1px solid #4F4F4F;
+    border-radius: 12px;
+    /*z-index: 4;*/
+}
+
+#entry {
+    border: none;
+    border-bottom: 1px solid #779;
+    background-color:#252F37;
+    outline: none;
+    width: 220px;
+    height: 32px;
+    margin: 10px 0 0 20px;
+    padding-bottom: 4px;
+    font-size: 26px;
+    text-align: center;
+    color: #dcdcdc;
+    transition: 0s ease-in-out;
+    -webkit-transition: 0s ease-in-out;
+    -moz-transition: 0s ease-in-out;
+}
+
+/* ===================================================================
+ * The username text settings.
+   (Notice gecos are the small names which appear next to the names)
+   (Selected ones are those inside the login box)
+ * ===================================================================*/
+
+.font_username {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
+    font-size:23pt;
+    line-height: 40px;
+    font-weight: 400;
+    color: #dcdcdc;
+    margin-right: 5px;
+}
+
+.font_gecos {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 1);
+    font-size: 12pt;
+    line-height: 40px;
+    font-weight: 300;
+    color: #dcdcdc;
+}
+
+.user_data{
+    position: relative;
+    display: block;
+    top: 38px;
+    font-family: "Raleway Light";
+    text-align: left;
+    padding-left: 45px;
+    margin-left: 80px;
+    height: 15pt;
+    width: 70%;
+    border-top: 1px solid #333;
+    background: #374652;
+    background: linear-gradient(
+                   315deg, transparent 14px,
+                   #374652 0)
+                bottom right;
+}
+
+#selected_user .font_username {
+    display: none;
+    font-size: 13pt;
+    line-height: 12pt;
+    font-weight:400;
+    text-shadow: none;
+    color: #dcdcdc;
+}
+
+#selected_user .font_gecos {
+    position: relative;
+    top: -18px;
+    font-size:9pt;
+    line-height: 40px;
+    font-weight: 600;
+    text-shadow: none;
+    color: #dcdcdc;
+}
+
+#current_gecos {
+    position: static;
+    text-align: left;
+    font-size: 9pt;
+    font-weight: 600;
+    line-height: 8pt;
+    color: #dcdcdc;
+}
+
+/* ===================================================================
+ * The status text at the bottom of the login box
+ * ===================================================================*/
+
+#selected_status {
+    position: relative;
+    float: right;
+    top: 3px;
+    margin-right: 22px;
+    font-size: 7.5pt;
+    line-height: 10pt;
+    color: #ccc;
+}
+
+#current_username {
+    position: relative;
+    text-align: left;
+    font-size: 9pt;
+    font-weight: 600;
+    line-height: 8pt;
+}
+
+
+/* ===================================================================
+ * Quit Dialog Buttons(shutdown, restart, etc...)
+ * ===================================================================*/
+
+.bootbox button {
+    background-color: #3d3d3d;
+    border: 2px solid #535353;
+    border-radius: 50px;
+    box-shadow: none;
+    outline: none;
+    color: #dcdcdc;
+    height: 80px;
+    width: 80px;
+    vertical-align: middle;
+}
+
+.bootbox button:hover {
+    background-color: #222;
+}
+
+.bootbox button .glyphicon {
+    top: 0;
+    font-size: 24pt;
+    text-align: center;
+
+}
+.restart-button:active, .cancel-button:active {
+    color: #252F37;
+}
+
+/*### Shutdown ###*/
+
+
+.shutdown-button:hover {
+    border-color: #f53434;
+    color: #f53434
+ }
+
+.shutdown-button:active,
+.shutdown-button:focus,
+.shutdown-button:checked {
+    background-color: #f53434;
+    color: #222;
+ }
+
+/*### Suspend ###*/
+
+.suspend-button {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+}
+.suspend-button:hover {
+    border-color: #f58439;
+    color: #f58439;
+ }
+
+.suspend-button:active,
+.suspend-button:focus,
+.suspend-button:checked {
+    background-color: #f58439;
+    color: #222;
+ }
+
+/*### Restart ###*/
+
+.restart-button:hover {
+    border-color: #abe640;
+    color: #abe640;
+ }
+
+.restart-button:active {
+    background-color: #abe640;
+    color: #222;
+ }
+
+/*### Cancel ###*/
+
+.cancel-button:hover {
+    border-color: #3be0b4;
+    color: #3be0b4
+ }
+
+.cancel-button:active {
+    background-color: #3be0b4;
+    color: #222;
+ }
+
+/* ===================================================================
+ * The fade-in and out effect when clicking the upper-right quit button
+ * ===================================================================*/
+
+.modal-backdrop.fade {
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.modal-backdrop.in {
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+}
+
+/* ===================================================================
+ * The section which contains the "are you sure you want to quit" question
+ * ===================================================================*/
+
+.modal-body {
+    position: relative;
+    top: 13em;
+    font-family: Sawasdee;
+    font-size: 11pt;
+    font-weight: 600;
+    padding: 28px 0 10px;
+    border-top: 1px solid #484848;
+    background-color: #252f37;
+    color: #dcdcdc;
+}
+
+
+/* ===================================================================
+ * The section which contain the shutdown. restart... buttons(the footer)
+ * ===================================================================*/
+
+.modal-footer {
+    position: relative;
+    top: 14.7em;
+    text-align: center;
+    margin-top: 0;
+    border-top: 0;
+    border-bottom: 1px solid #484848;
+    background-color: #252f37;
+}
+
+.modal-footer a {
+    display: inline;
+}
+.modal-footer:before,
+.modal-footer:after {
+    display: table;
+    content: " ";
+}
+
+.modal-footer:after {
+    clear: both;
+}
+
+.modal-footer:before,
+.modal-footer:after {
+    display: table;
+    content: " ";
+}
+
+.modal-footer:after {
+    clear: both;
+}
+
+.modal-footer .btn + .btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.modal-footer .btn-group .btn + .btn {
+    margin-left: -1px;
+}
+
+.modal-footer .btn-block + .btn-block {
+    margin-left: 0;
+}
+
+@media screen and (min-width: 768px) {
+.modal-dialog {
+    width: 600px;
+    margin: 30px auto;
+  }
+
+.modal-content {
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* ===================================================================
+ * Popovers for sessions and languages
+ * ===================================================================*/
+
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1010;
+    display: none;
+    max-width: 276px;
+    padding: 0px;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #252f37;    
+    border-radius: 5px;
+    background-clip: padding-box;
+}
+
+.popover.top {
+    margin-top: -15px;
+}
+
+.popover.right {
+    margin-left: 12px;
+}
+
+.popover.bottom {
+    margin-top: 10px;
+}
+
+.popover.left {
+    margin-left: -10px;
+}
+
+.popover-title {
+    color: #dcdcdc;
+    padding: 4px 14px;
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+    background-color: #374652;
+    border-bottom: 1px solid #484848;
+    border-radius: 2px 2px 0 0;
+}
+
+.popover-content {
+    padding: 0;
+    margin: 0;
+    color: #dcdcdc;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.popover .arrow,
+.popover .arrow:after {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+.popover .arrow {
+    border-width: 11px;    
+}
+
+.popover .arrow:after {    
+    content: "";
+    border-width: 10px;
+    border-top-color: #252f37 !important;;
+}
+
+/* ===================================================================
+ * In use is the right arrow!
+ * ===================================================================*/
+
+.popover.right .arrow {
+    top: 50%;
+    left: -11px;
+    margin-top: -11px;
+    border-right-color: #484848;
+    border-left-width: 0;
+}
+
+.popover.right .arrow:after {
+    bottom: -10px;
+    left: 1px;
+    border-right-color: #2d2d2d;
+    border-left-width: 0;
+    content: " ";
+}
+
+ /* ===================================================================
+ * The "OK" button in the login box
+ * ===================================================================*/
+
+#ok_button_box {
+    display: none;
+    background: rgba(230,240,40,0.6);
+    position: relative;
+    /*margin-top: 124px;*/
+    margin-left: 306px;
+    height: 32px;
+}
+
+#ok_button_box:after{
+    border: 1px solid;
+    border-color: transparent #535353;
+    border-width: 25px 0 25px 18px;
+}
+
+#ok_button {
+    background-color: #3d3d3d;
+    border: 1px solid #535353;
+    box-shadow: none;
+    outline: none;
+    padding: 5px 32px 5px;
+    height: 32px;
+    font-size: 12px;
+    color: #dcdcdc;
+}
+
+#ok_button:hover {
+    background-color: #A4295E;
+    border: 1px solid #A4295E;
+    border-radius: 2px;
+    box-shadow: none;
+    outline: none;
+    padding: 5px 32px 5px;
+    height: 32px;
+    font-size: 12px;
+}
+
+#ok_button:active {
+    background-color: #8C244D;
+    border: 1px solid #A4295E;
+    border-radius: 2px;
+    box-shadow: none;
+    outline: none;
+    padding: 5px 32px 5px;
+    height: 32px;
+    font-size: 12px;
+}
+
+/* ===================================================================
+ * The session and language pictures
+ * ===================================================================*/
+
+.session-picture {
+    width: 24px;
+    height: 24px;
+    margin-right: 5px;
+}
+
+.language-picture {
+    width: 16px;
+    height: 16px;
+    margin: 5px;
+}
+
+.session-picture, .language-picture {
+    border-radius: 16px;
+}
+/* ===================================================================
+ * The upper-right quit button
+ * ===================================================================*/
+
+#quit {
+    position: fixed;
+    width: 5%;
+    margin: 0 47.5%;
+    top: 142px;
+    /*padding-top: 2px;*/
+    font-size: 16pt;
+    color: #E6E6E6;
+}
+
+#quit:hover {
+    text-shadow: 0 1px 2px rgba(180, 180, 180, 0.8);
+    }
+
+/* ===================================================================
+ * The error message
+ * ===================================================================*/
+
+#error {
+    position: relative;
+    background-color: #2d2d2e;
+    box-shadow: 0 0 0 1px #484848;
+    border-radius: 2px;
+    float: right;
+    margin-top: 50px;
+    margin-right: 6px;
+    padding: 8px 8px 8px 8px;
+    font-size: 10pt;
+    color: #dcdcdc;
+}
+#error:before {
+    content:"!";
+    margin-right: 2px;
+    background-color:#F53434;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* ===================================================================
+ * Timed message
+ * ===================================================================*/
+
+#timed {
+    background-color: #2d2d2e;
+    box-shadow: 0 0 0 1px #484848;
+    border-radius: 2px;
+    float: right;
+    margin-top: 70px;
+    margin-right: 6px;
+    padding: 8px 8px 8px 8px;
+    font-size: 10pt;
+    color: #dcdcdc;
+}
+
+#message {
+}
+
+/* ===================================================================
+ * This effects every odd item!
+ * ===================================================================*/
+ /**/
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+   background-color: #252F37;
+}
+
+/*table.table-striped tbody tr td,
+table.table-striped tbody tr th {
+    background-color: #252F37;
+    color: #222;
+}
+ */
+
+/* ===================================================================
+ * This affects the item hover in the popups!
+ * ===================================================================*/
+
+ .table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+    /*background: -webkit-linear-gradient(top,  #A4295E, #A4295E);*/
+    background: #374652;
+    color: #dcdcdc;
+}
+
+/* ===================================================================
+ * The session and language links in the popovers.
+   (Notice the hovering an item is not the same as hovering the link!)
+ * ===================================================================*/
+
+#languages {
+    color: #dcdcdc;
+    width: 100%;
+    text-align: left;
+}
+
+#languages td a {
+    color: #dcdcdc;
+}
+
+#languages td a:hover {
+    color: #dcdcdc;
+}
+
+#languages > a > td:hover {
+    background: -webkit-linear-gradient(top,  #6598cb, #4d82b7);
+    color: #dcdcdc;
+}
+
+#sessions {
+    color: #dcdcdc;
+    width: 100%;
+    text-align: left;
+}
+
+#sessions td a {
+    color: #dcdcdc;
+}
+
+#sessions td a:hover {
+    color: #dcdcdc;
+}
+
+/* ===================================================================
+ * Link decoration.(Turned off)
+ * ===================================================================*/
+
+a {
+    color:#dcdcdc;text-decoration:none;
+}
+
+a:hover {
+    color:#dcdcdc;text-decoration:none;
+}
