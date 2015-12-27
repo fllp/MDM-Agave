@@ -129,6 +129,7 @@ a:focus {
 #left_box {
     /*display:table;*/
     position: fixed;
+    margin-top: 5em;
     width: 50%;
     height: 100%;
 }
@@ -139,10 +140,9 @@ a:focus {
 
 #login_box {
     position: relative;
-    top: 40px;
     max-width: 500px;
     height: 100px;
-    margin-left: 15%;
+    margin-left: 18%;
     color: #dcdcdc;
 }
 
