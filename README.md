@@ -2,7 +2,7 @@
 
 This is a HTML5-theme for the login greeter MDM.  
 It features vibrant colors, a reduced, rounded design and a time and date dash.  
-It is inspired by [the Numix Project] [MDM-Numix] and [eleMINTary]. Code is based on [Mint-X]
+It is inspired by [the Numix Project], [MDM-Numix] and [eleMINTary]. Code is based on [Mint-X].
 
 [Mint-X]: https://github.com/linuxmint/mint-mdm-themes/
 [MDM-Numix]: http://zagortenay333.deviantart.com/art/MDM-Numix-427299252
@@ -13,7 +13,7 @@ It is inspired by [the Numix Project] [MDM-Numix] and [eleMINTary]. Code is base
 
 ## Versions
 
-**v1.2**  
+**v1.2** 
 Initial public release  
 *Tested with MDM 2.0.7*
 
@@ -31,7 +31,7 @@ Simply open the login screen settings (on Linux Mint under system settings) and 
 - [ ] design for error messages
 - [ ] support different time formats (DD.MM vs. MM.DD, ect.)
 
-## LLicense
+## License
 
 GPLv3
 
