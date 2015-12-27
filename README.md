@@ -19,7 +19,7 @@ Initial public release
 
 ## Installation
 
-*Caution*: You will need to rename the file extension `.zip` to `tar.gz` since GitHub only supports ZIP-file downloads for releases.  
+*Caution*: Be sure to choose the file extension `tar.gz`  when downloading a release/tag since MDMs settings only read those.  
 Simply open the login screen settings (on Linux Mint under system settings) and import the archive.  
 **Manual installation**: Extract the archive to `/usr/share/mdm/html-themes` (requires root privileges)
 
