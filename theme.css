@@ -756,31 +756,51 @@ a:focus {
  * The error message
  * ===================================================================*/
 
-#error {
-    position: relative;
-    background-color: #2d2d2e;
-    box-shadow: 0 0 0 1px #484848;
-    border-radius: 2px;
-    float: right;
-    margin-top: 50px;
-    margin-right: 6px;
-    padding: 8px 8px 8px 8px;
-    font-size: 10pt;
-    color: #dcdcdc;
-}
-#error:before {
-    content:"!";
-    margin-right: 2px;
-    background-color:#F53434;
+#timed:before, #error:before {
+    display: inline-block;
+    float: left;    
     color: #fff;
+    font-size: 15pt;
     font-weight: bold;
+    text-align: center;
+    line-height: 27pt;
+    margin: -0.5em 0.6em 0 -1em;
+    width: 30pt;
+    height: 30pt; 
+    border: 2px solid #333;
+    border-radius: 15pt;
+}
+
+#error:before {
+    content: "!";
+    background-color:#F53434;    
+}
+
+#error, #timed {
+    position: relative;
+    float: right;
+    height: 2em;
+    width: auto;
+    margin-top: 15px;
+    margin-right: 8px;
+    padding: 0.3em 8px 0 0;
+    font-size: 10pt;    
+    color: #dcdcdc;
+    background-color: #374652;
+    box-shadow: 0 0 0 1px #484848;
+    border: 0px;
 }
 
 /* ===================================================================
  * Timed message
  * ===================================================================*/
 
-#timed {
+#timed:before {
+    content: "!";
+    background-color:#F58439;    
+}
+
+/*#timed {
     background-color: #2d2d2e;
     box-shadow: 0 0 0 1px #484848;
     border-radius: 2px;
@@ -791,9 +811,7 @@ a:focus {
     font-size: 10pt;
     color: #dcdcdc;
 }
-
-#message {
-}
+*/
 
 /* ===================================================================
  * This effects every odd item!
